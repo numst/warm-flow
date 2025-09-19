@@ -289,7 +289,8 @@ public class NodeServiceImpl extends WarmServiceImpl<FlowNodeDao<Node>, Node> im
 
     private List<String> prefixOrSuffixCodes(Map<String, List<Skip>> skipMap, String nodeCode,
                                              Function<Skip, String> supplier) {
-        Set<String> visited = new HashSet<>(); // 记录已访问节点，防止循环
+        // 记录已访问节点，防止循环
+        Set<String> visited = new HashSet<>();
         List<String> result = new ArrayList<>();
         prefixOrSuffixCodesRecursive(skipMap, nodeCode, supplier, visited, result);
         return result;
@@ -298,7 +299,8 @@ public class NodeServiceImpl extends WarmServiceImpl<FlowNodeDao<Node>, Node> im
     private void prefixOrSuffixCodesRecursive(Map<String, List<Skip>> skipMap, String nodeCode,
                                               Function<Skip, String> supplier, Set<String> visited, List<String> result) {
         if (visited.contains(nodeCode)) {
-            return; // 防止循环访问
+            // 防止循环访问
+            return;
         }
 
         visited.add(nodeCode);
@@ -308,7 +310,8 @@ public class NodeServiceImpl extends WarmServiceImpl<FlowNodeDao<Node>, Node> im
             for (Skip skip : skipList) {
                 if (SkipType.isPass(skip.getSkipType())) {
                     String nextNodeCode = supplier.apply(skip);
-                    if (!result.contains(nextNodeCode)) { // 避免重复添加
+                    // 避免重复添加
+                    if (!result.contains(nextNodeCode)) {
                         result.add(nextNodeCode);
                     }
                     prefixOrSuffixCodesRecursive(skipMap, nextNodeCode, supplier, visited, result);
