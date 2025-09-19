@@ -102,6 +102,10 @@ public interface Instance extends RootEntity {
         return FlowEngine.jsonConvert.strToMap(getVariable());
     }
 
+    /**
+     * 流程状态（0待提交 1审批中 2审批通过 4终止 5作废 6撤销 8已完成 9已退回 10失效 11拿回）
+     * @return 流程状态
+     */
     String getFlowStatus();
 
     Instance setFlowStatus(String flowStatus);
