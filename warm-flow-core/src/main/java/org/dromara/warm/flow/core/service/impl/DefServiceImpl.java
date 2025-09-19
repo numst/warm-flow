@@ -15,6 +15,7 @@
  */
 package org.dromara.warm.flow.core.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.dromara.warm.flow.core.FlowEngine;
 import org.dromara.warm.flow.core.constant.ExceptionCons;
 import org.dromara.warm.flow.core.dto.DefJson;
@@ -49,9 +50,9 @@ import java.util.stream.Collectors;
  * @author warm
  * @since 2023-03-29
  */
+@Slf4j
 public class DefServiceImpl extends WarmServiceImpl<FlowDefinitionDao<Definition>, Definition> implements DefService {
 
-    private static final Logger log = LoggerFactory.getLogger(DefServiceImpl.class);
 
     @Override
     public DefService setDao(FlowDefinitionDao<Definition> warmDao) {
