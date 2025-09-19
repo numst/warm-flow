@@ -43,8 +43,10 @@ public interface User extends RootEntity {
     @Override
     User setUpdateTime(Date updateTime);
 
+    @Override
     String getCreateBy();
 
+    @Override
     User setCreateBy(String createBy);
 
     @Override
