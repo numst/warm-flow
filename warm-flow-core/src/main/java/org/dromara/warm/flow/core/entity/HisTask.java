@@ -36,6 +36,12 @@ public interface HisTask extends RootEntity {
     HisTask setId(Long id);
 
     @Override
+    String getCreateBy();
+
+    @Override
+    HisTask setCreateBy(String createBy);
+
+    @Override
     Date getCreateTime();
 
     @Override
