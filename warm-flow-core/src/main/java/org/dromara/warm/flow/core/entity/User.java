@@ -67,14 +67,27 @@ public interface User extends RootEntity {
     @Override
     User setDelFlag(String delFlag);
 
+    /**
+     * 获取人员类型
+     * @see org.dromara.warm.flow.core.enums.UserType
+     * @return 人员类型（1待办任务的审批人权限 2待办任务的转办人权限 3待办任务的委托人权限）
+     */
     String getType();
 
     User setType(String type);
 
+    /**
+     * 获取 权限人
+     * @return 权限人
+     */
     String getProcessedBy();
 
     User setProcessedBy(String processedBy);
 
+    /**
+     * 获取 任务表ID
+     * @return 任务表ID
+     */
     Long getAssociated();
 
     User setAssociated(Long associated);
