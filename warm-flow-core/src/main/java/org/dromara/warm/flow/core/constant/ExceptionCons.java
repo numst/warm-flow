@@ -145,7 +145,7 @@ public class ExceptionCons {
 
     public static final String NOT_FOUNT_LAST_TASK = "未找到前置任务!";
 
-    public static final String NOT_FOUNT_HANDLED_TASK = "为找到您已办理过的任务!";
+    public static final String NOT_FOUNT_HANDLED_TASK = "未找到您已办理过的任务!";
 
     public static final String NOT_FOUNT_HANDLED_TASK_HANDLER = "拿回的任务未办理!";
 
