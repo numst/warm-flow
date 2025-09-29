@@ -41,6 +41,11 @@ public class FlowHisTask implements HisTask {
     private Long id;
 
     /**
+     * 创建人
+     */
+    @TableField(fill = FieldFill.INSERT)
+    private String createBy;
+    /**
      * 任务开始时间
      */
     @TableField(fill = FieldFill.INSERT)
@@ -55,6 +60,7 @@ public class FlowHisTask implements HisTask {
     /**
      * 更新人
      */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateBy;
 
     /**
