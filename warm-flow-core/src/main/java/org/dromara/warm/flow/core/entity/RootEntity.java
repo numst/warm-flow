@@ -46,9 +46,13 @@ public interface RootEntity extends Serializable {
         return this;
     }
 
-    String getUpdateBy();
+    default String getUpdateBy() {
+        return null;
+    }
 
-    RootEntity setUpdateBy(String updateBy);
+    default RootEntity setUpdateBy(String updateBy) {
+        return this;
+    }
 
     String getTenantId();
 

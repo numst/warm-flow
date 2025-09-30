@@ -118,8 +118,7 @@ public interface Definition extends RootEntity {
     Definition setVersion(String version);
 
     /**
-     * 获取是否发布状态
-     * 0=未开启 1=开启
+     * 获取是否发布状态 (0未发布 1已发布 9已失效)
      * @return 发布状态
      */
     Integer getIsPublish();
