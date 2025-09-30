@@ -143,13 +143,14 @@ watch(() => props.node, n => {
       n.properties.formCustom = JSON.stringify(n.properties) === "{}" ? "N" : (n.properties.formCustom || "");
       let listenerTypes = n.properties.listenerType ? n.properties.listenerType.split(",") : [];
       let listenerPaths = n.properties.listenerPath ? n.properties.listenerPath.split("@@") : [];
-      n.properties.listenerRows = listenerTypes.map((type, index) => ({
+      n.properties.listenerRows = listenerTypes && listenerTypes.length > 0 ? listenerTypes.map((type, index) => ({
         listenerType: type,
         listenerPath: listenerPaths[index]
-      }));
+      })) : [{}];
       form.value = {
         nodeType: n.type,
         nodeCode: n.id,
+        ext: n.properties.ext ? n.properties.ext : {},
         ...n.properties,
         nodeName: n.text instanceof Object ? n.text.value : n.text
       }

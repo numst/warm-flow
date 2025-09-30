@@ -36,12 +36,6 @@ public interface HisTask extends RootEntity {
     HisTask setId(Long id);
 
     @Override
-    String getCreateBy();
-
-    @Override
-    HisTask setCreateBy(String createBy);
-
-    @Override
     Date getCreateTime();
 
     @Override
@@ -52,12 +46,6 @@ public interface HisTask extends RootEntity {
 
     @Override
     HisTask setUpdateTime(Date updateTime);
-
-    @Override
-    String getUpdateBy();
-
-    @Override
-    HisTask setUpdateBy(String updateBy);
 
     @Override
     String getTenantId();

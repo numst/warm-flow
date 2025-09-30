@@ -48,15 +48,6 @@ public class FlowHisTask implements HisTask {
     private Date updateTime;
 
     /**
-     * 创建人
-     */
-    private String createBy;
-    /**
-     * 更新人
-     */
-    private String updateBy;
-
-    /**
      * 租户ID
      */
     private String tenantId;

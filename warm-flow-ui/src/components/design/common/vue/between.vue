@@ -1,7 +1,7 @@
 <template>
   <div class="between">
     <el-form ref="formRef" class="betweenForm" :model="form" label-width="120px" size="small" :rules="rules" :disabled="disabled" label-position="left">
-      <el-tabs type="border-card" class="Tabs" v-model="tabsValue">
+      <el-tabs type="border-card" class="Tabs" v-model="tabsValue" @tab-change="handleTabChange">
         <el-tab-pane v-for="item in tabsList" :key="item.name" :label="item.label" :name="item.name">
           <div v-if="tabsValue === '1'">
             <el-form-item label="节点编码：" prop="nodeCode">
@@ -48,25 +48,6 @@
               <el-input v-model="form.nodeRatio" type="number" placeholder="请输入"></el-input>
               <div class="placeholder mt5">票签比例范围：(0-100)的值</div>
             </el-form-item>
-            <el-form-item label="办理人列表：" class="permissionItem" prop="permissionFlag">
-              <el-table :data="permissionRows" style="width: 100%;margin-top: 10px;" class="inputGroup">
-                <el-table-column prop="storageId" label="入库主键" width="250">
-                  <template #default="scope">
-                    <el-form-item prop="storageId">
-                      <el-input v-model="scope.row.storageId" style="width: 100%;" @blur="event => inputBlur(event, scope.$index)"></el-input>
-                    </el-form-item>
-                  </template>
-                </el-table-column>
-                <el-table-column prop="handlerName" label="权限名称"></el-table-column>
-                <el-table-column label="操作" width="55" v-if="!disabled">
-                  <template #default="scope">
-                    <el-button type="danger" v-if="!disabled" :icon="Delete" @click="delPermission(scope.$index)"/>
-                  </template>
-                </el-table-column>
-              </el-table>
-              <el-button type="primary" v-if="!disabled" @click="addPermission">添加行</el-button>
-              <el-button type="primary" v-if="!disabled" @click="initUser">选择</el-button>
-            </el-form-item>
             <el-form-item label="驳回到指定节点" prop="formCustom">
               <template #label>
                 <span v-if="form.collaborativeWay === '2'"  class="mr5" style="color: red;">*</span>驳回到指定节点
@@ -100,6 +81,27 @@
             <nodeExtList v-if="baseList.length > 0" ref="nodeBase" v-model="form.ext" :formList="baseList" :disabled="disabled"></nodeExtList>
           </div>
           <div v-else-if="tabsValue === '2'">
+              <el-form-item class="listenerItem" prop="permissionFlag">
+                  <el-table :data="permissionRows" style="width: 100%;margin-top: 10px;" class="inputGroup">
+                      <el-table-column prop="storageId" label="入库主键" width="250">
+                          <template #default="scope">
+                              <el-form-item prop="storageId">
+                                  <el-input v-model="scope.row.storageId" style="width: 100%;" @blur="event => inputBlur(event, scope.$index)"></el-input>
+                              </el-form-item>
+                          </template>
+                      </el-table-column>
+                      <el-table-column prop="handlerName" label="权限名称"></el-table-column>
+                      <el-table-column label="操作" width="55" v-if="!disabled">
+                          <template #default="scope">
+                              <el-button type="danger" v-if="!disabled" :icon="Delete" @click="delPermission(scope.$index)"/>
+                          </template>
+                      </el-table-column>
+                  </el-table>
+                  <el-button type="primary" v-if="!disabled" @click="addPermission">添加行</el-button>
+                  <el-button type="primary" v-if="!disabled" @click="initUser">选择</el-button>
+              </el-form-item>
+          </div>
+          <div v-else-if="tabsValue === '3'">
             <el-form-item prop="listenerRows" class="listenerItem">
               <el-table :data="form.listenerRows" style="width: 100%">
                 <el-table-column prop="listenerType" label="类型" width="90">
@@ -185,7 +187,8 @@ const props = defineProps({
 const tabsValue = ref("1");
 const tabsList = ref([
   { label: "基础设置", name: "1" },
-  { label: "监听器", name: "2" }
+  { label: "办理人设置", name: "2" },
+  { label: "监听器", name: "3" },
 ]);
 const form = ref(props.modelValue);
 const userVisible = ref(false);
@@ -227,6 +230,26 @@ function addPermission() {
 // 办理人手动输入，失焦获取权限名称
 function inputBlur(event, index) {
   form.value.permissionFlag[index] = event.target.value;
+}
+
+// 添加在其他函数后面
+function handleTabChange(activeTabName) {
+    // 可以根据不同的 tab 做相应处理
+    switch(activeTabName) {
+        case '1':
+            // 基础设置 tab
+            break;
+        case '2':
+            // 办理人设置 tab
+            getHandlerFeedback();
+            break;
+        case '3':
+            // 监听器 tab
+            break;
+        default:
+            // 自定义 tab
+            break;
+    }
 }
 
 /** 选择角色权限范围触发 */
@@ -350,8 +373,6 @@ getPermissionFlag();
 
 getNodeExt();
 
-getHandlerFeedback();
-
 // 表单必填校验
 function validate() {
   return new Promise(async (resolve, reject) => {
@@ -369,7 +390,7 @@ function validate() {
 }
 
 async function tabsValidate(resolve, reject) {
-  let addTabsList = tabsList.value.slice(2);
+  let addTabsList = tabsList.value.slice(tabsList.value.length);
   if (addTabsList.length === 0) resolve(true);
   // 切换页签做校验
   for (const e of addTabsList) {

@@ -135,8 +135,8 @@ public interface Instance extends RootEntity {
     Instance setFlowStatus(String flowStatus);
 
     /**
-     * 审批表单是否自定义（Y是 2否）
-     * @return  （Y是 2否）
+     * 审批表单是否自定义（Y是 N否）
+     * @return  （Y是 N否）
      */
     String getFormCustom();
 
