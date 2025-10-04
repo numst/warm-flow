@@ -48,12 +48,6 @@ public interface HisTask extends RootEntity {
     HisTask setUpdateTime(Date updateTime);
 
     @Override
-    String getUpdateBy();
-
-    @Override
-    HisTask setUpdateBy(String updateBy);
-
-    @Override
     String getTenantId();
 
     @Override
@@ -65,6 +59,10 @@ public interface HisTask extends RootEntity {
     @Override
     HisTask setDelFlag(String delFlag);
 
+    /**
+     * 获取流程定义ID
+     * @return 流程定义ID
+     */
     Long getDefinitionId();
 
     HisTask setDefinitionId(Long definitionId);
@@ -73,6 +71,10 @@ public interface HisTask extends RootEntity {
 
     HisTask setFlowName(String flowName);
 
+    /**
+     * 获取流程实例ID
+     * @return 流程实例ID
+     */
     Long getInstanceId();
 
     HisTask setInstanceId(Long instanceId);
@@ -125,6 +127,11 @@ public interface HisTask extends RootEntity {
 
     HisTask setSkipType(String skipType);
 
+    /**
+     * 获取流程状态
+     * @see org.dromara.warm.flow.core.enums.FlowStatus
+     * @return 流程状态
+     */
     String getFlowStatus();
 
     HisTask setFlowStatus(String flowStatus);

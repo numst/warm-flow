@@ -5,19 +5,19 @@
                       :rules="[{ required: item.must, message: `${item.label}不能为空`, trigger: ['blur', 'change'] }]">
             <template #label>
                 <span>{{ item.label }}</span>
-                <el-tooltip v-if="item.type === 4" effect="dark" :content="'请选择' + item.desc">
+                <el-tooltip v-if="item.type === 4" effect="dark" :content="item.desc">
                     <el-icon :size="14" style="margin-left: 2px;margin-top: 4px;">
                         <WarningFilled/>
                     </el-icon>
                 </el-tooltip>
                 <span>：</span>
             </template>
-            <el-input v-if="item.type === 1" v-model="form[item.code]" :placeholder="'请输入' + item.desc"></el-input>
+            <el-input v-if="item.type === 1" v-model="form[item.code]" :placeholder="item.desc"></el-input>
             <el-input v-else-if="item.type === 2" v-model="form[item.code]" :rows="2" type="textarea"
-                      :placeholder="'请输入' + item.desc"/>
+                      :placeholder="item.desc"/>
             <el-select v-else-if="item.type === 3" v-model="form[item.code]" clearable
                        :multiple="item.multiple || false"
-                       :placeholder="'请选择' + item.desc" style="width: 300px">
+                       :placeholder="item.desc" style="width: 300px">
                 <el-option v-for="dItem in item.dict" :key="dItem.value" :label="dItem.label"
                            :value="dItem.value"></el-option>
             </el-select>
@@ -30,7 +30,7 @@
                         </el-col>
                     </el-row>
                 </el-radio-group>
-                <el-checkbox-group v-else v-model="form[item.code]" :placeholder="'请选择' + item.desc">
+                <el-checkbox-group v-else v-model="form[item.code]" :placeholder="item.desc">
                     <el-row :gutter="20">
                         <el-col :span="item.dict.length < 3 ? null :8" v-for="(dItem, dIndex) in item.dict"
                                 :key="dIndex">

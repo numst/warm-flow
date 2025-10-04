@@ -30,7 +30,6 @@
         <result property="tenantId" column="tenant_id"/>
         <result property="flowName" column="flow_name"/>
         <result property="delFlag" column="del_flag"/>
-        <result property="updateBy" column="update_by"/>
     </resultMap>
 
     <sql id="selectVo">
@@ -56,8 +55,7 @@
                t.create_time,
                t.update_time,
                t.tenant_id,
-               t.del_flag,
-               t.update_by
+               t.del_flag
         from flow_his_task t
     </sql>
 
@@ -101,7 +99,6 @@
             <if test="entity.updateTime != null">and t.update_time = #{entity.updateTime}</if>
             <if test="entity.delFlag != null  and entity.delFlag != ''">and t.del_flag = #{entity.delFlag}</if>
             <if test="entity.tenantId != null  and entity.tenantId != ''">and t.tenant_id = #{entity.tenantId}</if>
-            <if test="entity.updateBy != null and entity.updateBy != ''">and t.update_by = #{entity.updateBy}</if>
         </where>
     </sql>
 
@@ -158,8 +155,7 @@
         create_time,
         update_time,
         tenant_id,
-        del_flag,
-        update_by
+        del_flag
         )
         values
         <foreach collection="list" item="item" separator=",">
@@ -186,8 +182,7 @@
             #{item.createTime},
             #{item.updateTime},
             #{item.tenantId},
-            #{item.delFlag},
-            #{item.updateBy}
+            #{item.delFlag}
             )
         </foreach>
     </sql>
@@ -216,8 +211,7 @@
         create_time,
         update_time,
         tenant_id,
-        del_flag,
-        update_by
+        del_flag
         )
         <foreach collection="list" item="item" separator=" union all">
             select
@@ -243,8 +237,7 @@
             #{item.createTime},
             #{item.updateTime},
             #{item.tenantId},
-            #{item.delFlag},
-            #{item.updateBy}
+            #{item.delFlag}
             from dual
         </foreach>
     </sql>
@@ -332,7 +325,6 @@
             <if test="updateTime != null">update_time,</if>
             <if test="tenantId != null and tenantId != ''">tenant_id,</if>
             <if test="delFlag != null and delFlag != ''">del_flag,</if>
-            <if test="updateBy != null and updateBy != ''">update_by,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -358,7 +350,6 @@
             <if test="updateTime != null">#{updateTime},</if>
             <if test="tenantId != null and tenantId != ''">#{tenantId},</if>
             <if test="delFlag != null and delFlag != ''">#{delFlag},</if>
-            <if test="updateBy != null and updateBy != ''">#{updateBy},</if>
         </trim>
     </insert>
 
@@ -384,7 +375,6 @@
             <if test="ext != null">ext = #{ext},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
-            <if test="updateBy != null">update_by = #{updateBy},</if>
         </trim>
         where id = #{id}
         <if test="delFlag != null  and delFlag != ''">and del_flag = #{delFlag}</if>

@@ -14,7 +14,9 @@ create table FLOW_DEFINITION
     LISTENER_PATH   VARCHAR2(500),
     EXT             VARCHAR2(500),
     CREATE_TIME     DATE,
+    CREATE_BY       VARCHAR2(64) default '',
     UPDATE_TIME     DATE,
+    UPDATE_BY       VARCHAR2(64) default '',
     DEL_FLAG        VARCHAR2(1) default '0',
     TENANT_ID       VARCHAR2(40)
 );
@@ -37,7 +39,9 @@ comment on column FLOW_DEFINITION.LISTENER_TYPE is '监听器类型';
 comment on column FLOW_DEFINITION.LISTENER_PATH is '监听器路径';
 comment on column FLOW_DEFINITION.EXT is '扩展字段，预留给业务系统使用';
 comment on column FLOW_DEFINITION.CREATE_TIME is '创建时间';
+comment on column FLOW_DEFINITION.CREATE_BY is '创建人';
 comment on column FLOW_DEFINITION.UPDATE_TIME is '更新时间';
+comment on column FLOW_DEFINITION.UPDATE_BY is '更新人';
 comment on column FLOW_DEFINITION.DEL_FLAG is '删除标志';
 comment on column FLOW_DEFINITION.TENANT_ID is '租户id';
 
@@ -59,7 +63,9 @@ create table FLOW_NODE
     FORM_PATH       VARCHAR2(100),
     VERSION         VARCHAR2(20),
     CREATE_TIME     DATE,
+    CREATE_BY       VARCHAR2(64) default '',
     UPDATE_TIME     DATE,
+    UPDATE_BY       VARCHAR2(64) default '',
     EXT        CLOB,
     DEL_FLAG        VARCHAR2(1)   default '0',
     TENANT_ID       VARCHAR2(40),
@@ -86,7 +92,9 @@ comment on column FLOW_NODE.FORM_CUSTOM is '审批表单是否自定义 (Y是 N�
 comment on column FLOW_NODE.FORM_PATH is '审批表单路径';
 comment on column FLOW_NODE.VERSION is '版本';
 comment on column FLOW_NODE.CREATE_TIME is '创建时间';
+comment on column FLOW_NODE.CREATE_BY is '创建人';
 comment on column FLOW_NODE.UPDATE_TIME is '更新时间';
+comment on column FLOW_NODE.UPDATE_BY is '更新人';
 comment on column FLOW_NODE.EXT is '节点扩展属性';
 comment on column FLOW_NODE.DEL_FLAG is '删除标志';
 comment on column FLOW_NODE.TENANT_ID is '租户id';
@@ -105,7 +113,9 @@ create table FLOW_SKIP
     SKIP_CONDITION VARCHAR2(200),
     COORDINATE     VARCHAR2(100),
     CREATE_TIME    DATE,
+    CREATE_BY      VARCHAR2(64) default '',
     UPDATE_TIME    DATE,
+    UPDATE_BY      VARCHAR2(64) default '',
     DEL_FLAG       VARCHAR2(1) default '0',
     TENANT_ID      VARCHAR2(40)
 );
@@ -125,7 +135,9 @@ comment on column FLOW_SKIP.SKIP_TYPE is '跳转类型 (PASS审批通过 REJECT�
 comment on column FLOW_SKIP.SKIP_CONDITION is '跳转条件';
 comment on column FLOW_SKIP.COORDINATE is '坐标';
 comment on column FLOW_SKIP.CREATE_TIME is '创建时间';
+comment on column FLOW_SKIP.CREATE_BY is '创建人';
 comment on column FLOW_SKIP.UPDATE_TIME is '更新时间';
+comment on column FLOW_SKIP.UPDATE_BY is '更新人';
 comment on column FLOW_SKIP.DEL_FLAG is '删除标志';
 comment on column FLOW_SKIP.TENANT_ID is '租户id';
 
@@ -141,9 +153,10 @@ create table FLOW_INSTANCE
     FLOW_STATUS     VARCHAR2(20),
     ACTIVITY_STATUS NUMBER(1)    default 1,
     DEF_JSON        CLOB,
-    CREATE_BY       VARCHAR2(64) default '',
     CREATE_TIME     DATE,
+    CREATE_BY       VARCHAR2(64) default '',
     UPDATE_TIME     DATE,
+    UPDATE_BY       VARCHAR2(64) default '',
     EXT             VARCHAR2(500),
     DEL_FLAG        VARCHAR2(1)  default '0',
     TENANT_ID       VARCHAR2(40)
@@ -163,9 +176,10 @@ comment on column FLOW_INSTANCE.VARIABLE is '任务变量';
 comment on column FLOW_INSTANCE.FLOW_STATUS is '流程状态（0待提交 1审批中 2审批通过 4终止 5作废 6撤销 8已完成 9已退回 10失效 11拿回）';
 comment on column FLOW_INSTANCE.ACTIVITY_STATUS is '流程激活状态（0挂起 1激活）';
 comment on column FLOW_INSTANCE.DEF_JSON is '流程定义json';
-comment on column FLOW_INSTANCE.CREATE_BY is '创建者';
 comment on column FLOW_INSTANCE.CREATE_TIME is '创建时间';
+comment on column FLOW_INSTANCE.CREATE_BY is '创建人';
 comment on column FLOW_INSTANCE.UPDATE_TIME is '更新时间';
+comment on column FLOW_INSTANCE.UPDATE_BY is '更新人';
 comment on column FLOW_INSTANCE.EXT is '扩展字段，预留给业务系统使用';
 comment on column FLOW_INSTANCE.DEL_FLAG is '删除标志';
 comment on column FLOW_INSTANCE.TENANT_ID is '租户id';
@@ -178,11 +192,13 @@ create table FLOW_TASK
     NODE_CODE     VARCHAR2(100),
     NODE_NAME     VARCHAR2(100),
     NODE_TYPE     NUMBER(1),
-    FLOW_STATUS      VARCHAR2(20),
+    FLOW_STATUS   VARCHAR2(20),
     FORM_CUSTOM   VARCHAR2(1) default 'N',
     FORM_PATH     VARCHAR2(100),
     CREATE_TIME   DATE,
+    CREATE_BY     VARCHAR2(64) default '',
     UPDATE_TIME   DATE,
+    UPDATE_BY     VARCHAR2(64) default '',
     DEL_FLAG      VARCHAR2(1) default '0',
     TENANT_ID     VARCHAR2(40)
 );
@@ -201,7 +217,9 @@ comment on column FLOW_TASK.FLOW_STATUS is '流程状态（0待提交 1审批中
 comment on column FLOW_TASK.FORM_CUSTOM is '审批表单是否自定义 (Y是 N否)';
 comment on column FLOW_TASK.FORM_PATH is '审批表单路径';
 comment on column FLOW_TASK.CREATE_TIME is '创建时间';
+comment on column FLOW_TASK.CREATE_BY is '创建人';
 comment on column FLOW_TASK.UPDATE_TIME is '更新时间';
+comment on column FLOW_TASK.UPDATE_BY is '更新人';
 comment on column FLOW_TASK.DEL_FLAG is '删除标志';
 comment on column FLOW_TASK.TENANT_ID is '租户id';
 
@@ -268,8 +286,9 @@ create table FLOW_USER
     PROCESSED_BY VARCHAR2(80),
     ASSOCIATED   NUMBER(20)  not null,
     CREATE_TIME  DATE,
-    CREATE_BY    VARCHAR2(80),
+    CREATE_BY    VARCHAR2(64) default '',
     UPDATE_TIME  DATE,
+    UPDATE_BY    VARCHAR2(64) default '',
     DEL_FLAG     VARCHAR2(1) default '0',
     TENANT_ID    VARCHAR2(40)
 );
@@ -283,8 +302,9 @@ comment on column FLOW_USER.TYPE is '人员类型（1待办任务的审批人权
 comment on column FLOW_USER.PROCESSED_BY is '权限人)';
 comment on column FLOW_USER.ASSOCIATED is '任务表id';
 comment on column FLOW_USER.CREATE_TIME is '创建时间';
-comment on column FLOW_USER.CREATE_BY is '节点名称';
+comment on column FLOW_USER.CREATE_BY is '创建人';
 comment on column FLOW_USER.UPDATE_TIME is '更新时间';
+comment on column FLOW_USER.UPDATE_BY is '更新人';
 comment on column FLOW_USER.DEL_FLAG is '删除标志';
 comment on column FLOW_USER.TENANT_ID is '租户id';
 

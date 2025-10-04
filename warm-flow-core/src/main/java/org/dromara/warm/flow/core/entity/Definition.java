@@ -70,6 +70,10 @@ public interface Definition extends RootEntity {
     @Override
     Definition setDelFlag(String delFlag);
 
+    /**
+     * 流程编码
+     * @return 流程编码
+     */
     String getFlowCode();
 
     Definition setFlowCode(String flowCode);
@@ -78,6 +82,11 @@ public interface Definition extends RootEntity {
 
     Definition setFlowName(String flowName);
 
+    /**
+     * 设计器模型（CLASSICS经典模型 MIMIC仿钉钉模型）
+     * @see org.dromara.warm.flow.core.enums.ModelEnum
+     * @return  设计器模型
+     */
     String getModelValue();
 
     Definition setModelValue(String modelValue);
@@ -90,6 +99,10 @@ public interface Definition extends RootEntity {
 
     Definition setVersion(String version);
 
+    /**
+     * 获取是否发布状态 (0未发布 1已发布 9已失效)
+     * @return 发布状态
+     */
     Integer getIsPublish();
 
     Definition setIsPublish(Integer isPublish);
@@ -114,34 +127,47 @@ public interface Definition extends RootEntity {
 
     Definition setUserList(List<User> userList);
 
+    /**
+     * 流程激活状态（0=挂起 1=激活）
+     * @see org.dromara.warm.flow.core.enums.ActivityStatus
+     * @return 流程激活状态
+     */
     Integer getActivityStatus();
 
     Definition setActivityStatus(Integer activityStatus);
 
+    /**
+     * 获取监听器类型
+     * @return 监听器类型
+     */
     String getListenerType();
 
     Definition setListenerType(String listenerType);
 
+    /**
+     * 获取监听器路径
+     * @return 监听器路径
+     */
     String getListenerPath();
 
     Definition setListenerPath(String listenerPath);
 
     default Definition copy() {
         return FlowEngine.newDef()
-                .setTenantId(this.getTenantId())
-                .setDelFlag(this.getDelFlag())
-                .setFlowCode(this.getFlowCode())
-                .setFlowName(this.getFlowName())
-                .setModelValue(this.getModelValue())
-                .setCategory(this.getCategory())
-                .setVersion(this.getVersion())
-                .setFormCustom(this.getFormCustom())
-                .setFormPath(this.getFormPath())
-                .setListenerType(this.getListenerType())
-                .setListenerPath(this.getListenerPath())
-                .setExt(this.getExt())
-                .setCreateBy(this.getCreateBy())
-                .setUpdateBy(this.getUpdateBy());
+            .setTenantId(this.getTenantId())
+            .setDelFlag(this.getDelFlag())
+            .setFlowCode(this.getFlowCode())
+            .setFlowName(this.getFlowName())
+            .setModelValue(this.getModelValue())
+            .setCategory(this.getCategory())
+            .setVersion(this.getVersion())
+            .setFormCustom(this.getFormCustom())
+            .setFormPath(this.getFormPath())
+            .setListenerType(this.getListenerType())
+            .setListenerPath(this.getListenerPath())
+            .setExt(this.getExt())
+            .setCreateBy(this.getCreateBy())
+            .setUpdateBy(this.getUpdateBy());
 
     }
 }
