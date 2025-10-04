@@ -116,12 +116,12 @@ public class FlowInstance implements Instance {
     private Integer activityStatus;
 
     /**
-     * 审批表单是否自定义（Y是 2否）
+     * 审批表单是否自定义（Y=是 N=否）
      */
     private String formCustom;
 
     /**
-     * 审批表单是否自定义（Y是 2否）
+     * 审批表单是否自定义（Y=是 N=否）
      */
     private String formPath;
 

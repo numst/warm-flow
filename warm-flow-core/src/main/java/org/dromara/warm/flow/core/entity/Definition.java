@@ -71,15 +71,29 @@ public interface Definition extends RootEntity {
     Definition setDelFlag(String delFlag);
 
     /**
-     * 流程编码
+     * 获取流程编码
      * @return 流程编码
      */
     String getFlowCode();
 
+    /**
+     * 设置流程编码
+     * @param flowCode flowCode
+     * @return Definition
+     */
     Definition setFlowCode(String flowCode);
 
+    /**
+     * 获取流程名称
+     * @return 流程名称
+     */
     String getFlowName();
 
+    /**
+     * 设置流程名称
+     * @param flowName flowName
+     * @return Definition
+     */
     Definition setFlowName(String flowName);
 
     /**
@@ -95,6 +109,10 @@ public interface Definition extends RootEntity {
 
     Definition setCategory(String category);
 
+    /**
+     * 获取流程定义的版本号
+     * @return 版本号
+     */
     String getVersion();
 
     Definition setVersion(String version);
@@ -107,6 +125,10 @@ public interface Definition extends RootEntity {
 
     Definition setIsPublish(Integer isPublish);
 
+    /**
+     * 审批表单是否自定义（Y=是 N=否）
+     * @return 是否自定义
+     */
     String getFormCustom();
 
     Definition setFormCustom(String formCustom);
